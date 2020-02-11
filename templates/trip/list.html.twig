@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    Recherche
+    <form name="formSearch" method="post" action="">
+        <p>
+            <input type="checkbox" name="" id="searchMyTrip"> Mes sorties
+        </p>
+    </form>
+    <div class="row">
+        {# boucle sur le tableau contenant les trips #}
+        {% for trip in trips %}
+            <div class="col-sm-12 col-lg-6 col-xl-4">
+                    <article class="card mb-2">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ trip.name }}</h5>
+                            {#<div class="badge badge-info">{{ trip.state.wording }}</div>#}
+                            <div>{{ trip.info }}</div>
+                        </div>
+                    </article>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block title %}Sorties{% endblock %}

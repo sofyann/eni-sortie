@@ -18,33 +18,26 @@ class TripRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Trip::class);
     }
-
-    // /**
-    //  * @return Trip[] Returns an array of Trip objects
-    //  */
-    /*
-    public function findByExampleField($value)
+/**
+* Requête personnalisée pour récupérer les trips
+*
+*/
+    public function findListTrips()
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('t');
+        $qb->addSelect('t')
+            ->addSelect('s')
+            ->join('t.state', 's');
+        //$qb->addOrderBy('t.registration_deadline', 'DESC');
+        $query = $qb->getQuery();
 
-    /*
-    public function findOneBySomeField($value): ?Trip
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query->setMaxResults(30);
+        $query->setFirstResult(0);
+
+        $results = $query->getResult();
+        return $results;
     }
-    */
+
+
+
 }

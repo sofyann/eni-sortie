@@ -66,7 +66,7 @@ class Trip
     private $state;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="trips")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="trips", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $location;

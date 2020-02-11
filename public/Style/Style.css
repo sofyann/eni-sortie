@@ -27,6 +27,15 @@
     color:gray ;
     padding: 10px;
 }
+.formulaire > div {
+    background-color: #323c48;
+    color:gray ;
+    padding: 10px;
+}
+.formulaire > div > * {
+    background-color: #323c48;
+    color:gray ;
+}
 #bouton {
   background-color:#04a2b3;
     margin-top: 20px;

@@ -55,11 +55,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $administrator;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
     private $actif;
 
     /**
@@ -194,18 +189,6 @@ class User implements UserInterface
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getAdministrator(): ?bool
-    {
-        return $this->administrator;
-    }
-
-    public function setAdministrator(bool $administrator): self
-    {
-        $this->administrator = $administrator;
 
         return $this;
     }

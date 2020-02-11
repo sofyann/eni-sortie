@@ -1,0 +1,37 @@
+* {
+    background-color: #2a323c;
+}
+/* page connexion début ------------------------------- */
+.formulaire{
+    text-align: center;
+    color: white;
+    display: inline-table;
+    background-color: #323c48;
+    width: 50%;
+    min-width: 350px;
+    margin: 25%;
+    padding: 60px;
+    position: absolute;
+    z-index: 1000;
+    border-radius: 2px;
+}
+.formulaire > h1{
+    background-color: #323c48;
+}
+.formulaire > h4{
+    background-color: #323c48;
+    padding: 10px;
+}
+.formulaire > label {
+    background-color: #323c48;
+    color:gray ;
+    padding: 10px;
+}
+#bouton {
+  background-color:#04a2b3;
+    margin-top: 20px;
+    border-color: #323c48;
+    width: 80%;
+  }
+/*page connexion fin -----------------------------*/
+/*page inscription debut -----------------------------*/

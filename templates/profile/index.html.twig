@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+    <h1>Votre profil</h1>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h2>Modifier mon profil</h2>
+    {{ form_start(profileForm) }}
+    {{ form_row(profileForm.name) }}
+    {{ form_row(profileForm.firstname) }}
+    {{ form_row(profileForm.email) }}
+    {{ form_row(profileForm.phone) }}
+    <button class="btn">Enregistrer</button>
+    {{ form_end(profileForm) }}
+    <h2>Modifier mon mot de passe</h2>
+    {{ form_start(newPasswordForm) }}
+    {{ form_row(newPasswordForm.oldPassword) }}
+    {{ form_row(newPasswordForm.newPassword) }}
+    <button class="btn">Enregistrer</button>
+    {{ form_end(newPasswordForm) }}
+{% endblock %}

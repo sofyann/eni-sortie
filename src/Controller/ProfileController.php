@@ -4,11 +4,17 @@ namespace App\Controller;
 
 use App\Form\ProfileType;
 use App\Form\ResetPasswordType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * Class ProfileController
+ * @package App\Controller
+ * @IsGranted("ROLE_USER")
+ */
 class ProfileController extends AbstractController
 {
     /**

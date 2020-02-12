@@ -8,11 +8,10 @@
     background-color:#04a2b3 ;
     width: 100%;
     font-size: 35px;
-    margin: 30px;
     color: white;
     margin: 0;
     position: fixed;
-    position: absolute;
+    top: 0;
     z-index: 1001;
 }
 .navbar-expand-lg .navbar-collapse {
@@ -225,6 +224,13 @@
     padding-right: 40%;
     font-size: 30px;
 }
-
-
 /*page ajoutSortie fin -----------------------------*/
+/*page Sortie debut -----------------------------*/
+body{
+    background-color: #323c48;
+width: 100%;
+}
+
+
+/*page Sortie fin -----------------------------*/
+

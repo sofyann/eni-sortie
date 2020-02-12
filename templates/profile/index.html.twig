@@ -3,6 +3,7 @@
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block body %}
+   <div class="formulaireProfil">
     <h1>Votre profil</h1>
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
@@ -16,6 +17,7 @@
     {{ form_row(profileForm.email) }}
     {{ form_row(profileForm.phone) }}
     <button class="btn">Enregistrer</button>
+       <div class="bandeBlanche"></div>
     {{ form_end(profileForm) }}
     <h2>Modifier mon mot de passe</h2>
     {{ form_start(newPasswordForm) }}
@@ -23,4 +25,5 @@
     {{ form_row(newPasswordForm.newPassword) }}
     <button class="btn">Enregistrer</button>
     {{ form_end(newPasswordForm) }}
+    </div>
 {% endblock %}

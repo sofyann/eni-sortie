@@ -272,7 +272,36 @@ width: 100%;
     opacity: 1;
     transition-duration: 0.4s;
 }
-
-
 /*page Sortie fin -----------------------------*/
-
+/*page profile debut -----------------------------*/
+.formulaireProfil{
+    text-align: end;
+    color: white;
+    display: inline-table;
+    background-color: #323c48;
+    width: 70%;
+    min-width: 350px;
+    margin-left: 15%;
+    margin-right: 20%;
+    margin-top: 60px;
+    padding: 60px;
+    position: absolute;
+    z-index: 1000;
+    border-radius: 2px;
+}
+.formulaireProfil h1{
+    margin-bottom: 0;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.bandeBlanche{
+    width: 100%;
+    height: 3px;
+    background-color: #323c48;
+}
+.formulaireProfil h2{
+    padding-bottom: 30px;
+    margin-bottom: 0;
+    text-align: center;
+}
+/*page profile fin -----------------------------*/

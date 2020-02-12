@@ -11,13 +11,19 @@
     <div class="row">
         <div class="col-xs-12 col-lg-4">
             <nav class="nav flex-column align-items-start">
+                {% if condition['modification'] == true %}
                 <a href="{{ path('trip_delete', {id: trip.id}) }}" class="btn-danger btn-sm">Supprimer cette sortie</a>
-                {% if condition['annuler'] != true %}
                 <a href="{{ path('trip_edit', {id: trip.id}) }}" class="btn-primary btn-sm">Modifier cette sortie</a>
                 <a href="{{ path('trip_cancel', {id: trip.id}) }}" class="btn-warning btn-sm">annuler cette sortie</a>
                 {% endif %}
                 {% if condition['creer'] == true %}
                     <a href="{{ path('trip_open', {id: trip.id}) }}" class="btn-info btn-sm">Ouvrir cette sortie</a>
+                {% endif %}
+                {% if (app.user not in trip.users) and condition['inscription'] == true %}
+                    <a href="{{ path('trip_registration', {id: trip.id}) }}" class="btn-success btn-sm">Inscription</a>
+                {% endif %}
+                {% if (app.user in trip.users) and condition['desincription'] == true %}
+                    <a href="{{ path('trip_unsubscribe', {id: trip.id}) }}" class="btn-secondary btn-sm">Désinscription</a>
                 {% endif %}
             </nav>
         </div>
@@ -30,7 +36,7 @@
             <div>Date de la sortie : {{ trip.dateBeginning|date('d-m-Y') }}</div>
             <div>fin des inscriptions le : {{ trip.registrationDeadline|date('d-m-Y') }}</div>
             <div>Durée de la sortie : {{ trip.duration }}min</div>
-            <div>Participation  /{{ trip.registrationMax }}</div>
+            <div>Participation : {{ trip.users|length }}/{{ trip.registrationMax }}</div>
 
 
             <div>Ajoutée par : {{ trip.organizer.name }} {{ trip.organizer.firstname }}</div>

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="formulaireADDSortie">
     <h1>Ajouter une nouvelle sortie !</h1>
     {% for message in app.flashes('danger') %}
         <div class="alert alert-danger">
@@ -11,14 +12,13 @@
     {{ form_widget(tripForm) }}
 
     <div class="row">
-
         <div class="col-sm-10 offset-2">
             <button class="btn btn-success">Ajouter !</button>
         </div>
     </div>
 
     {{ form_end(tripForm) }}
-
+    </div>
 {% endblock %}
 
 {% block title %}Ajouter une sortie{% endblock %}

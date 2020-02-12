@@ -14,19 +14,23 @@
             <input type="checkbox" name="" id="searchMyTrip"> Mes sorties
         </p>
     </form>#}
-    <div class="row">
+    <div class="row sortiesClass">
         {# boucle sur le tableau contenant les trips #}
         {% for trip in trips %}
-            <div class="col-sm-12 col-lg-6 col-xl-4">
-                <a href="{{ path('trip_detail', {id: trip.id}) }}">
+            <div class=" col-md-3 col-sm-12 containerClass">
+
                     <article class="card mb-2">
                         <div class="card-body">
                             <h5 class="card-title">{{ trip.name }}</h5>
                             {#<div class="badge badge-info">{{ trip.state.wording }}</div>#}
-                            <div>{{ trip.info }}</div>
+                            <p><span> Informations : </span>{{ trip.info }}</p>
+                            <p><span> Durée : </span>{{ trip.duration }} minutes</p>
+                            <p><span> Nombre maximun d'inscription : </span>{{ trip.registrationMax }}</p>
                         </div>
+                        <a href="{{ path('trip_detail', {id: trip.id}) }}" class="BoutonDetail">Detail
+                        </a>
                     </article>
-                </a>
+
             </div>
         {% endfor %}
     </div>

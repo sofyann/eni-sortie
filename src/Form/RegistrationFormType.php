@@ -26,6 +26,9 @@ class RegistrationFormType extends AbstractType
                     new Email([
                         'message' => 'L\'adresse mail saisie est invalide.'
                     ])
+                ],
+                'attr' => [
+                    'class' => 'emailClass'
                 ]
             ])
             ->add('name', TextType::class, [
@@ -36,6 +39,10 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'Le nom indiqué doit contenir au minimum 2 caractères.',
                         'maxMessage' => 'Le nom indiqué doit contenir au maximum 100 caractères.'
                     ])
+                ],
+                'label' => 'nom',
+                'attr' => [
+                    'class' => 'nameClass'
                 ]
             ])
             ->add('firstname', TextType::class, [
@@ -46,6 +53,10 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'Le nom indiqué doit contenir au minimum 2 caractères.',
                         'maxMessage' => 'Le nom indiqué doit contenir au maximum 100 caractères.'
                     ])
+                ],
+                'label' => 'prenom',
+                'attr' => [
+                    'class' => 'firstnameClass'
                 ]
             ])
             ->add('phone', TextType::class, [
@@ -56,27 +67,41 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'Le numéro de téléphone saisie est invalide.',
                         'maxMessage' => 'Le nom indiqué doit contenir au maximum 100 caractères.'
                     ])
+                ], 'label' => 'telephone',
+                'attr' => [
+                    'class' => 'phoneClass'
                 ]
             ])
             ->add('administrator', CheckboxType::class, [
                 'mapped' => false,
-                'required' => false
+                'label' => 'administrateur',
+                'required' => false,
+                'attr' => [
+                    'class' => 'administratorClass '
+                ]
             ])
             ->add('site', EntityType::class, [
                 'class' => Site::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'siteClass'
+                ]
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
+                'label' => 'mot de passe',
+                'attr' => [
+                    'class' => 'plainPasswordClass'
+                ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'veuillez entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'le mot de passe doit contenir au moins 6',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

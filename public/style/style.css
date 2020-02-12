@@ -1,6 +1,42 @@
 * {
     background-color: #2a323c;
+    margin: 0;
 }
+/* nav début ------------------------------- */
+#navbar{
+
+    background-color:#04a2b3 ;
+    width: 100%;
+    font-size: 35px;
+    margin: 30px;
+    color: white;
+    margin: 0;
+    position: fixed;
+    position: absolute;
+    z-index: 1001;
+}
+.navbar-expand-lg .navbar-collapse {
+    background-color:#04a2b3 ;
+}
+.navbar-nav{
+    background-color:#04a2b3 ;
+    font-size: 20px;
+    color:#04a2b3;
+    flex-direction: row;
+}
+.navbar-brand > h1{
+    background-color:#04a2b3;
+}
+.navbar-nav > a {
+    width: 50%;
+    display: block;
+    background-color: #04a2b3;
+}
+
+
+
+
+/* nav fin ------------------------------- */
 /* page connexion début ------------------------------- */
 .formulaire{
     text-align: center;
@@ -44,3 +80,151 @@
   }
 /*page connexion fin -----------------------------*/
 /*page inscription debut -----------------------------*/
+
+.formulaireRegister{
+    text-align: end;
+    color: white;
+    display: inline-table;
+    background-color: #323c48;
+    width: 70%;
+    min-width: 350px;
+    margin-left: 15%;
+    margin-right: 20%;
+    margin-top: 150px;
+    padding: 60px;
+    position: absolute;
+    z-index: 1000;
+    border-radius: 2px;
+}
+
+.formulaireRegister > h1{
+    background-color: #323c48;
+}
+
+.nameClass{
+   width:70%;
+    background-color: white;
+    color:#2a323c ;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.firstnameClass{
+    width:70%;
+    background-color: white;
+    color:#2a323c ;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.emailClass {
+    width:70%;
+    background-color: white;
+    color:#2a323c ;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.plainPasswordClass {
+    width:70%;
+    background-color: white;
+    color:#2a323c ;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.phoneClass {
+    width:70%;
+    background-color: white;
+    color:#2a323c ;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+ }
+
+.siteClass {
+    width:70%;
+    background-color: white;
+    color:#2a323c ;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+}
+.siteClass > option {
+
+    background-color: white;
+    color:#2a323c ;
+}
+
+.administratorClass {
+    text-align: center;
+     background-color: white;
+     color:#2a323c ;
+     padding: 10px;
+     margin: 20px;
+     border-radius: 5px;
+ }
+.btn {
+    width: 100%;
+    text-align: center;
+    background-color:#04a2b3;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-color: #323c48;
+}
+.classread{
+    width: 80%;
+    text-align: start;
+    margin-left: 20%;
+}
+/*page inscription fin -----------------------------*/
+
+/*page ajoutSortie debut -----------------------------*/
+
+.formulaireADDSortie{
+    text-align: end;
+    color: white;
+    display: inline-table;
+    background-color: #323c48;
+    width: 70%;
+    min-width: 350px;
+    margin-left: 15%;
+    margin-right: 20%;
+    margin-top: 120px;
+    padding: 60px;
+    position: absolute;
+    z-index: 1000;
+    border-radius: 2px;
+}
+.formulaireADDSortie h1{
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    padding-bottom: 50px;
+
+}
+.formulaireADDSortie  div input {
+    background-color: white;
+    width:60%;
+    color:#2a323c ;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+.row{
+    text-align: center;
+    max-width: 80%;
+    margin-left:2%;
+}
+.ville{
+    padding-right: 40%;
+    font-size: 30px;
+}
+
+
+/*page ajoutSortie fin -----------------------------*/

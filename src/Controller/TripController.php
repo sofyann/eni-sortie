@@ -98,6 +98,12 @@ class TripController extends AbstractController
                     "tripForm" => $form->createView()
                 ]);
             }
+            if($trip->getDateBeginning() < new \DateTime()){
+                $this->addFlash('danger', 'La date de la sortie ne peut pas être dans le passé...');
+                return $this->render('trip/add.html.twig', [
+                    "tripForm" => $form->createView()
+                ]);
+            }
             /** @var User $connectedUser */
             $connectedUser = $this->getUser();
             $trip->setOrganizer($connectedUser);
@@ -131,6 +137,18 @@ class TripController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($trip->getDateBeginning() < $trip->getRegistrationDeadline()) {
+                $this->addFlash('danger', 'La date limite d\'inscription ne peut pas être après la date de sortie');
+                return $this->render('trip/add.html.twig', [
+                    "tripForm" => $form->createView()
+                ]);
+            }
+            if($trip->getDateBeginning() < new \DateTime()){
+                $this->addFlash('danger', 'La date de la sortie ne peut pas être dans le passé...');
+                return $this->render('trip/add.html.twig', [
+                    "tripForm" => $form->createView()
+                ]);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($trip);
             $em->flush();

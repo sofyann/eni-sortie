@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class TripType extends AbstractType
 {
@@ -18,23 +19,30 @@ class TripType extends AbstractType
             ])
             ->add('dateBeginning', DateTimeType::class, [
                 'label' => 'Date de sortie',
+                'attr' =>['class' => 'DateDebut dateInscription '],
+                'widget' => 'single_text'
+
+
             ])
             ->add('duration', null, [
                 'label' => 'Durée de la sortie (en minute)',
-                'attr' => array('min' => 0),
+                'attr' =>[ 'min' => 0, 'class' => 'DureSortie ']
             ])
-            ->add('registrationDeadline', null, [
+            ->add('registrationDeadline', DateTimeType::class, [
                 'label' => 'Delais d\'inscription',
+                'widget' => 'single_text'
             ])
             ->add('registrationMax', null, [
                 'label' => 'Nombre de participant maximum',
-                'attr' => array('min' => 0),
+                'attr' => [ 'min' => 0, 'class' => 'RegistrationMaxDate dateInscription  '],
+
             ])
             ->add('info', null, [
                 'label' => 'Description',
             ])
             ->add('location',LocationType::class, [
                 'label' => 'Adresse',
+                'label_attr'=> ['class'=> 'ville']
             ])
         ;
     }

@@ -25,7 +25,8 @@ class LocationType extends AbstractType
                 'label' => 'longitude',
             ])
             ->add('city',CityType::class, [
-                'label' => 'Ville',
+                'label' => false,
+
             ])
         ;
     }

@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Sorties.com | {% block title %}{% endblock %}</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ asset('style/style.css') }}">
-        {% block stylesheets %}{% endblock %}
-    </head>
     <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark " id="navbar">
@@ -24,7 +17,9 @@
             </div>
         </nav>
     </header>
+    <main>
         {% block body %}{% endblock %}
+    </main>
     <script
             src="https://code.jquery.com/jquery-3.4.1.slim.js"
             integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="
@@ -33,4 +28,11 @@
     <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     {% block javascripts %}{% endblock %}
     </body>
+<head>
+        <meta charset="UTF-8">
+        <title>Sorties.com | {% block title %}{% endblock %}</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ asset('style/style.css') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
 </html>

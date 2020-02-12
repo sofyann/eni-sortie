@@ -8,11 +8,10 @@
     background-color:#04a2b3 ;
     width: 100%;
     font-size: 35px;
-    margin: 30px;
     color: white;
     margin: 0;
     position: fixed;
-    position: absolute;
+    top: 0;
     z-index: 1001;
 }
 .navbar-expand-lg .navbar-collapse {
@@ -33,10 +32,13 @@
     background-color: #04a2b3;
 }
 
-
-
-
 /* nav fin ------------------------------- */
+
+/* main début */
+main {
+    margin-top: 10vh;
+}
+/* main fin */
 /* page connexion début ------------------------------- */
 .formulaire{
     text-align: center;

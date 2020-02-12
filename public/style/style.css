@@ -32,10 +32,13 @@
     background-color: #04a2b3;
 }
 
-
-
-
 /* nav fin ------------------------------- */
+
+/* main début */
+main {
+    margin-top: 10vh;
+}
+/* main fin */
 /* page connexion début ------------------------------- */
 .formulaire{
     text-align: center;

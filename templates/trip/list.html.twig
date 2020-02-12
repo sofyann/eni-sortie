@@ -11,6 +11,7 @@
         {# boucle sur le tableau contenant les trips #}
         {% for trip in trips %}
             <div class="col-sm-12 col-lg-6 col-xl-4">
+                <a href="{{ path('trip_detail', {id: trip.id}) }}">
                     <article class="card mb-2">
                         <div class="card-body">
                             <h5 class="card-title">{{ trip.name }}</h5>

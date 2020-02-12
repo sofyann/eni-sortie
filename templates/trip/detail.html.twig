@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-xs-12 col-lg-4">
+            <nav class="nav flex-column align-items-start">
+                <a href="{{ path('trip_delete', {id: trip.id}) }}" class="btn-danger btn-sm">Supprimer cette sortie</a>
+                {% if condition['annuler'] != true %}
+                <a href="{{ path('trip_cancel', {id: trip.id}) }}" class="btn-warning btn-sm">annuler cette sortie</a>
+                {% endif %}
+                {% if condition['creer'] == true %}
+                    <a href="{{ path('trip_open', {id: trip.id}) }}" class="btn-info btn-sm">Ouvrir cette sortie</a>
+                {% endif %}
+                <a href="{{ path('trip_edit', {id: trip.id}) }}" class="btn-primary btn-sm">Modifier cette sortie</a>
+            </nav>
+        </div>
+        <div class="col-xs-12 col-lg-8">
+            <h2>{{ trip.name }}</h2> <h4>{{ trip.state.wording }}</h4>
+            <div class="badge badge-info"></div>
+
+            <div>{{ trip.info|nl2br }}</div>
+
+            <div>Date de la sortie : {{ trip.dateBeginning|date('d-m-Y') }}</div>
+            <div>fin des inscriptions le : {{ trip.registrationDeadline|date('d-m-Y') }}</div>
+            <div>Durée de la sortie : {{ trip.duration }}min</div>
+            <div>Participation  /{{ trip.registrationMax }}</div>
+
+
+            <div>Ajoutée par : {{ trip.organizer.name }} {{ trip.organizer.firstname }}</div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}{% endblock %}

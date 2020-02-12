@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\ProfileType;
 use App\Form\ResetPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -56,9 +57,21 @@ class ProfileController extends AbstractController
             }
         }
         return $this->render('profile/index.html.twig', [
-            'controller_name' => 'ProfileController',
             'profileForm' => $profileForm->createView(),
             'newPasswordForm' => $resetPasswordForm->createView()
         ]);
     }
+
+    /**
+     * @Route("/profile/{id}", requirements={"page"="\d+"}, name="user_profile")
+     */
+    public function profile(User $user) {
+        if ($user->getId() === $this->getUser()->getId()) {
+            return $this->redirectToRoute('profile');
+        }
+        return $this->render('profile/profile.html.twig', [
+            'user' => $user
+        ]);
+    }
+
 }

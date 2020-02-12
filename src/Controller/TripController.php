@@ -32,19 +32,40 @@ class TripController extends AbstractController
         $tripRepo = $this->getDoctrine()->getRepository(Trip::class);
         $trip = $tripRepo->find($id);
 
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+
         if (!$trip) {
             throw $this->createNotFoundException("Cette sortie n'existe pas !");
         }
         $state = $trip->getState();
         $condition = [
-            'annuler' => false,
-            'creer' => false
+            'modification' => false,
+            'creer' => false,
+            'inscription' => false,
+            'desincription' => false
         ];
-        if ($state->getWording() == 'Annulée') {
-            $condition['annuler'] = true;
-        }elseif($state->getWording() == 'Créée'){
+        $autorisationModif = false;
+        if ($connectedUser == $trip->getOrganizer() || in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+            $autorisationModif = true;
+        }
+
+        if (($state->getWording() == 'Ouverte' || $state->getWording() == 'Clôturée') && $autorisationModif) {
+            $condition['modification'] = true;
+        }
+        if ($state->getWording() == 'Créée' && $autorisationModif) {
+            $condition['modification'] = true;
             $condition['creer'] = true;
         }
+
+        if (($trip->getState()->getWording() === 'Ouverte') && ($trip->getDateBeginning() > new \DateTime()) &&
+            (count($trip->getUsers()) < $trip->getRegistrationMax()) && ($connectedUser !== $trip->getOrganizer())) {
+            $condition['inscription'] = true;
+        }
+        if (($connectedUser !== $trip->getOrganizer()) && ($trip->getState()->getWording() === 'Ouverte' || $trip->getState()->getWording() === 'Clôturée')) {
+            $condition['desincription'] = true;
+        }
+
         return $this->render('trip/detail.html.twig', [
             'trip' => $trip,
             'condition' => $condition
@@ -98,7 +119,7 @@ class TripController extends AbstractController
                     "tripForm" => $form->createView()
                 ]);
             }
-            if($trip->getDateBeginning() < new \DateTime()){
+            if ($trip->getDateBeginning() < new \DateTime()) {
                 $this->addFlash('danger', 'La date de la sortie ne peut pas être dans le passé...');
                 return $this->render('trip/add.html.twig', [
                     "tripForm" => $form->createView()
@@ -118,7 +139,7 @@ class TripController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Sortie ajoutée !');
-            return $this->redirectToRoute('trip_list');
+            return $this->redirectToRoute('trip_detail');
         }
 
         return $this->render('trip/add.html.twig', [
@@ -143,7 +164,7 @@ class TripController extends AbstractController
                     "tripForm" => $form->createView()
                 ]);
             }
-            if($trip->getDateBeginning() < new \DateTime()){
+            if ($trip->getDateBeginning() < new \DateTime()) {
                 $this->addFlash('danger', 'La date de la sortie ne peut pas être dans le passé...');
                 return $this->render('trip/add.html.twig', [
                     "tripForm" => $form->createView()
@@ -163,12 +184,12 @@ class TripController extends AbstractController
     }
 
     /**
-         * @Route("/sorties/ouvrir/{id}", name="trip_open")
+     * @Route("/sorties/ouvrir/{id}", name="trip_open")
      */
-    public function open(Trip $trip, Request $request)
+    public function open(Trip $trip)
     {
         //TODO verifier que la personne a les droit pour annuler
-        if($trip->getState()->getWording() !='Créée'){
+        if ($trip->getState()->getWording() != 'Créée') {
             $this->addFlash('warning', 'La sortie ne peut pas être ouverte');
             return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
         }
@@ -188,23 +209,76 @@ class TripController extends AbstractController
     }
 
     /**
-         * @Route("/sorties/annuler/{id}", name="trip_cancel")
+     * @Route("/sorties/annuler/{id}", name="trip_cancel")
      */
-    public function cancel(Trip $trip, Request $request)
+    public function cancel(Trip $trip)
     {
         //TODO verifier que la personne a les droit pour annuler
-            $stateRepo = $this->getDoctrine()->getRepository(State::class);
-            $state = $stateRepo->findOneBy(array('wording' => 'Annulée'));
+        $stateRepo = $this->getDoctrine()->getRepository(State::class);
+        $state = $stateRepo->findOneBy(array('wording' => 'Annulée'));
 
-            $trip->setState($state);
+        $trip->setState($state);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($trip);
-            $em->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($trip);
+        $em->flush();
 
-            $this->addFlash('warning', 'Sortie annulé ... :(');
+        $this->addFlash('warning', 'Sortie annulé ... :(');
+        return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
+
+
+    }
+
+    /**
+     * @Route("/sorties/inscription/{id}", name="trip_registration")
+     */
+    public function registration(Trip $trip)
+    {
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        if (($trip->getState()->getWording() !== 'Ouverte') && $trip->getDateBeginning() < new \DateTime()) {
+            $this->addFlash('warning', 'Cette sortie n\'est plus ouverte aux inscriptions');
             return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
+        } elseif (count($trip->getUsers()) >= $trip->getRegistrationMax()) {
+            $stateRepo = $this->getDoctrine()->getRepository(State::class);
+            $state = $stateRepo->findOneBy(array('wording' => 'Clôturée'));
+            $trip->setState($state);
+            $this->addFlash('warning', 'Le nombre d\'inscriptions maximum a été atteint');
+            return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
+        } elseif ($connectedUser == $trip->getOrganizer()) {
+            $this->addFlash('warning', 'Vous est l\'organisateur de cette sortie, vous n\'avez pas besoin de participer!');
+            return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
+        }
+        $trip->addUser($connectedUser);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($trip);
+        $em->flush();
 
+        $this->addFlash('success', 'Vous vous êtes bien inscrist');
+        return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
+    }
 
+    /**
+     * @Route("/sorties/desinscription/{id}", name="trip_unsubscribe")
+     */
+    public function unsubscribe(Trip $trip)
+    {
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        if ($connectedUser == $trip->getOrganizer()) {
+            $this->addFlash('warning', 'Vous est l\'organisateur de cette sortie, vous ne pouvez pas vous désincrire.');
+            return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
+        }
+        if (($trip->getState()->getWording() != 'Ouverte') && ($trip->getState()->getWording() != 'Clôturée')) {
+            $this->addFlash('warning', 'Vous ne pouvez plus vous désincrire.');
+            return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
+        }
+        $trip->removeUser($connectedUser);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($trip);
+        $em->flush();
+
+        $this->addFlash('success', 'Vous vous êtes désinscrit');
+        return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
     }
 }

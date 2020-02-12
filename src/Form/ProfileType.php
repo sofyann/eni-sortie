@@ -24,7 +24,9 @@ class ProfileType extends AbstractType
                         'minMessage' => 'Le nom indiqué doit contenir au minimum 2 caractères.',
                         'maxMessage' => 'Le nom indiqué doit contenir au maximum 100 caractères.'
                     ])
-                ]
+                ],
+                'label' => ' Nom',
+                'attr' => ['class' => 'nameClass']
             ])
             ->add('firstname', TextType::class, [
                 'constraints' => [
@@ -34,14 +36,18 @@ class ProfileType extends AbstractType
                         'minMessage' => 'Le nom indiqué doit contenir au minimum 2 caractères.',
                         'maxMessage' => 'Le nom indiqué doit contenir au maximum 100 caractères.'
                     ])
-                ]
+                ],
+                'label' => ' Prénom',
+                'attr' => ['class' => 'firstnameClass']
             ])
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new Email([
                         'message' => 'L\'adresse mail saisie est invalide.'
                     ])
-                ]
+                ],
+                'label' => ' Mail',
+                'attr' => ['class' => 'emailClass']
             ])
             ->add('phone', TextType::class, [
                 'constraints' => [
@@ -51,7 +57,9 @@ class ProfileType extends AbstractType
                         'minMessage' => 'Le numéro de téléphone saisie est invalide.',
                         'maxMessage' => 'Le nom indiqué doit contenir au maximum 100 caractères.'
                     ])
-                ]
+                ],
+                'label' => ' Telephone',
+                'attr' => ['class' => 'phoneClass']
             ]);
         ;
     }

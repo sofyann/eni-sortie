@@ -10,7 +10,17 @@
             {{ message }}
         </div>
     {% endfor %}
-    <h2>Modifier mon profil</h2>
+    {% if app.user.profilePictureFilename is same as(null) %}
+        <div style="height: 350px; width: 350px">Vous n'avez pas encore de photo de profil.</div>
+   {% else %}
+        <img src="{{ asset('./uploads/profils/' ~ app.user.profilePictureFilename) }}" alt="photo de profil">
+   {% endif %}
+   {{ form_start(pictureForm) }}
+       {{ form_row(pictureForm.picture) }}
+       <button class="btn">Enregistrer</button>
+   {{ form_end(pictureForm) }}
+
+       <h2>Modifier mon profil</h2>
     {{ form_start(profileForm) }}
     {{ form_row(profileForm.name) }}
     {{ form_row(profileForm.firstname) }}

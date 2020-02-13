@@ -73,6 +73,11 @@ class User implements UserInterface
      */
     private $site;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $profilePictureFilename;
+
     public function __construct()
     {
         $this->trips = new ArrayCollection();
@@ -270,6 +275,18 @@ class User implements UserInterface
     public function setSite(?Site $site): self
     {
         $this->site = $site;
+
+        return $this;
+    }
+
+    public function getProfilePictureFilename(): ?string
+    {
+        return $this->profilePictureFilename;
+    }
+
+    public function setProfilePictureFilename(?string $profilePictureFilename): self
+    {
+        $this->profilePictureFilename = $profilePictureFilename;
 
         return $this;
     }

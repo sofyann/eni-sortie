@@ -139,7 +139,7 @@ class TripController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Sortie ajoutée !');
-            return $this->redirectToRoute('trip_detail');
+            return $this->redirectToRoute('trip_list');
         }
 
         return $this->render('trip/add.html.twig', [

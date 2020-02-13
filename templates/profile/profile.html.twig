@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+    <div class="VueProfil">
+
+        <h1>Profil de {{ user.firstname }} {{ user.name }}</h1>
+        {% if user.profilePictureFilename is same as(null) %}
+            <div class="pasPhoto">{{ user.firstname }} n'a pas encore de photo de profil.</div>
+        {% else %}
+            <img src="{{ asset('./uploads/profils/' ~ user.profilePictureFilename) }}" alt="photo de profil">
+        {% endif %}
+
+        <p><span>Email</span> {{ user.email }}</p>
+        <p><span>Téléphone</span> {{ user.phone }}</p>
+        <p><span>Email</span> {{ user.email }}</p>
+        <p><span>Site</span> {{ user.site.name }}</p>
+        <p><span>A participé à</span> {{ user.trips.count }} <span>activités</span></p>
+
+        {% if user.trips.count > 0 %}
+        <h3>Activités auxquelles {{ user.firstname }} a participé</h3>
+        <table class="tableExplicationActivite">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>A</th>
+                <th>Organisé par</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for trip in user.trips %}
+                <tr>
+                    <th>{{ trip.name }}</th>
+                    <th>{{ trip.dateBeginning | date("m/d/Y")}}</th>
+                    <th>{{ trip.location.name }}</th>
+                    <th>{{ trip.organizer.firstname }} {{ trip.organizer.name }}</th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    {% endif %}
+{% endblock %}

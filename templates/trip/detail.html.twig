@@ -9,7 +9,9 @@
         {% endfor %}
     {% endfor %}
 
-        <div class="col-xs-12 col-lg-8 formulaireInfoSortie">
+
+<div class="blockSortieDetail">
+        <div class=" formulaireInfoSortie">
             <h1>{{ trip.name }}</h1> <h4><span>Statut : </span>{{ trip.state.wording }}</h4>
             <div class="badge badge-info"></div>
             <div><span>informations : </span>{{ trip.info|nl2br }}</div>
@@ -19,6 +21,29 @@
             <div><span>Participation : </span>{{ trip.users|length }}/{{ trip.registrationMax }}</div>
             <div><span>Ajoutée par : </span>{{ trip.organizer.name }} {{ trip.organizer.firstname }}</div>
         </div>
+    <div class="blockSortieUserInscrit">
+        <table>
+            <thead>
+            <tr class="trSortieUsers">
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in trip.users %}
+                <tr class="trSortieUsers">
+                    <td>{{user.name}}</td>
+                    <td>{{user.firstname}}</td>
+                    <td>{{user.email}}</td>
+                    <td><a href="{{ path('user_profile', {'id' : user.id }) }}">Voir profil</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
         <div class=" BoutonSorties">
             {% if condition['modification'] == true %}
                 <a href="{{ path('trip_delete', {id: trip.id}) }}" class="btn-danger btn-sm">Supprimer cette sortie</a>
@@ -35,6 +60,7 @@
                 <a href="{{ path('trip_unsubscribe', {id: trip.id}) }}" class="btn-secondary btn-sm">Désinscription</a>
             {% endif %}
         </div>
+
 {% endblock %}
 
 {% block title %}{% endblock %}

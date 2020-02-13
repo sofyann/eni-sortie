@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark " id="navbar">
-            <a class="navbar-brand" href="#"><h1>Sortie ENI</h1></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="#">accueil</a>
-                    <a class="nav-item nav-link" href="#">option 1</a>
-                    <a class="nav-item nav-link" href="#">option 2</a>
-                    <a class="nav-item nav-link" href="#">option 3</a>
-                </div>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark " id="navbar">
+        <a class="navbar-brand" href="{{ path('trip_list') }}"><h1>Sortie ENI</h1></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{{ path('trip_add') }}">Créer une sortie</a>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <a class="nav-link" href="{{ path('administration_ajouter_utilisateur') }}">Ajouter un utilisateur</a>
+                {% endif %}
             </div>
-        </nav>
-    </header>
-    <main>
-        {% block body %}{% endblock %}
-    </main>
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.slim.js"
-            integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="
-            crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    {% block javascripts %}{% endblock %}
-    </body>
+            <div class="navbar-nav">
+                {% if app.user %}
+                    <a class="nav-item nav-link" href="{{ path('profile') }}">Mon profil</a>
+                    <a class="nav-item nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{{ path('app_login') }}">Connexion</a>
+                {% endif %}
+
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    {% block body %}{% endblock %}
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+{% block javascripts %}{% endblock %}
+</body>
 <head>
-        <meta charset="UTF-8">
-        <title>Sorties.com | {% block title %}{% endblock %}</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ asset('style/style.css') }}">
-        {% block stylesheets %}{% endblock %}
-    </head>
+    <meta charset="UTF-8">
+    <title>Sorties.com | {% block title %}{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('style/style.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
 </html>

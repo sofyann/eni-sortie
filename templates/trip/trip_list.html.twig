@@ -1,0 +1,17 @@
+{% for trip in trips %}
+    <div class=" col-md-3 col-sm-12 containerClass">
+
+        <article class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title">{{ trip.name }}</h5>
+                {#<div class="badge badge-info">{{ trip.state.wording }}</div>#}
+                <p><span> Informations : </span>{{ trip.info }}</p>
+                <p><span> Durée : </span>{{ trip.duration }} minutes</p>
+                <p><span> Nombre maximun d'inscription : </span>{{ trip.registrationMax }}</p>
+            </div>
+            <a href="{{ path('trip_detail', {id: trip.id}) }}" class="BoutonDetail">Detail
+            </a>
+        </article>
+
+    </div>
+{% endfor %}

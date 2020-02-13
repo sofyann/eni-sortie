@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -79,9 +80,32 @@ class TripController extends AbstractController
     {
         $tripRepo = $this->getDoctrine()->getRepository(Trip::class);
 
-        $trips = $tripRepo->findListTrips();
+        $tabSearch = [
+            'crit' => 'all',
+            'userId' => $this->getUser()->getId()
+        ];
+        $trips = $tripRepo->findListTrips($tabSearch);
 
         return $this->render('trip/list.html.twig', [
+            "trips" => $trips
+        ]);
+    }
+    /**
+     * en mode ajax
+     * @Route("/tripSearch", name="trip_search")
+     */
+    public function search(Request $request)
+    {
+        $search = $request->request->get('search');
+        $tripRepo = $this->getDoctrine()->getRepository(Trip::class);
+
+        $tabSearch = [
+            'crit' => 'organizer',
+            'userId' => $this->getUser()->getId()
+        ];
+        $trips = $tripRepo->findListTrips($tabSearch);
+
+        return $this->render('trip/trip_list.html.twig', [
             "trips" => $trips
         ]);
     }
@@ -139,7 +163,9 @@ class TripController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Sortie ajoutée !');
-            return $this->redirectToRoute('trip_detail');
+            return $this->redirectToRoute('trip_detail', array(
+                'id' => $trip->getId()
+            ));
         }
 
         return $this->render('trip/add.html.twig', [

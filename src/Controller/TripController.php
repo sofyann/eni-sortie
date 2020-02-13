@@ -214,7 +214,6 @@ class TripController extends AbstractController
      */
     public function open(Trip $trip)
     {
-        //TODO verifier que la personne a les droit pour annuler
         if ($trip->getState()->getWording() != 'Créée') {
             $this->addFlash('warning', 'La sortie ne peut pas être ouverte');
             return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
@@ -239,7 +238,6 @@ class TripController extends AbstractController
      */
     public function cancel(Trip $trip)
     {
-        //TODO verifier que la personne a les droit pour annuler
         $stateRepo = $this->getDoctrine()->getRepository(State::class);
         $state = $stateRepo->findOneBy(array('wording' => 'Annulée'));
 

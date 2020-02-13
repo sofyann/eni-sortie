@@ -304,4 +304,109 @@ width: 100%;
     margin-bottom: 0;
     text-align: center;
 }
+.VueProfil{
+    text-align: center;
+    color: #868686;
+    background-color: #323c48;
+    width: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 50px;
+    padding: 60px;
+    border-radius: 2px;
+    line-height: 2;
+    font-size: 20px;
+}
+
+.VueProfil .pasPhoto{
+    height: 350px;
+    width: 350px;
+}
+.tableExplicationActivite{
+    margin: auto auto auto auto;
+    width: 90%;
+}
+.tableExplicationActivite thead {
+    color: white;
+}
+
 /*page profile fin -----------------------------*/
+/*page detailSortie debut -----------------------------*/
+.formulaireInfoSortie{
+    text-align: end;
+    color: #868686;
+    background-color: #323c48;
+    width: 35%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 50px;
+    padding: 60px;
+    border-radius: 2px;
+    line-height: 3;
+    font-size: 20px;
+}
+.formulaireInfoSortie span{
+    color: white;
+}
+.formulaireInfoSortie div{
+    text-align: center;
+}
+.formulaireInfoSortie h1, h4{
+    margin: 0;
+    color: white;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.formulaireInfoSortie h4{
+    color:#868686 ;
+}
+.blockSortieUserInscrit{
+    color: white;
+    background-color: #323c48;
+    width: 55%;
+    margin-top: 50px;
+    padding: 30px;
+    border-radius: 2px;
+    font-size: 20px;
+}
+.blockSortieUserInscrit table{
+    width: 100%;
+}
+.blockSortieDetail{
+    display: flex;
+    justify-content: space-around;
+}
+thead{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+thead th{
+    font-size: 25px;
+    background-color: #04a2b3;
+}
+.trSortieUsers{
+    border-bottom: solid white;
+    border-bottom-width: 0.5px;
+}
+.BoutonSorties a {
+    font-size: 20px;
+    margin-top: 50px;
+    padding: 10px;
+    color: white;
+    background-color: #04a2b3;
+    opacity: 0.6;
+    list-style-type: none;
+}
+.BoutonSorties a:hover {
+    background-color: #04a2b3;
+    color: white;
+    list-style-type: none;
+    opacity: 1;
+    transition-duration: 0.3s;
+
+}
+.BoutonSorties{
+    display: flex;
+    justify-content: space-around;
+}
+/*page detailSortie fin -----------------------------*/

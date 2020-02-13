@@ -8,62 +8,59 @@
             </div>
         {% endfor %}
     {% endfor %}
-    <div class="row">
-        <div class="col-xs-12 col-lg-4">
-            <nav class="nav flex-column align-items-start">
-                {% if condition['modification'] == true %}
-                <a href="{{ path('trip_delete', {id: trip.id}) }}" class="btn-danger btn-sm">Supprimer cette sortie</a>
-                <a href="{{ path('trip_edit', {id: trip.id}) }}" class="btn-primary btn-sm">Modifier cette sortie</a>
-                <a href="{{ path('trip_cancel', {id: trip.id}) }}" class="btn-warning btn-sm">annuler cette sortie</a>
-                {% endif %}
-                {% if condition['creer'] == true %}
-                    <a href="{{ path('trip_open', {id: trip.id}) }}" class="btn-info btn-sm">Ouvrir cette sortie</a>
-                {% endif %}
-                {% if (app.user not in trip.users) and condition['inscription'] == true %}
-                    <a href="{{ path('trip_registration', {id: trip.id}) }}" class="btn-success btn-sm">Inscription</a>
-                {% endif %}
-                {% if (app.user in trip.users) and condition['desincription'] == true %}
-                    <a href="{{ path('trip_unsubscribe', {id: trip.id}) }}" class="btn-secondary btn-sm">Désinscription</a>
-                {% endif %}
-            </nav>
-        </div>
-        <div class="col-xs-12 col-lg-8">
-            <h2>{{ trip.name }}</h2> <h4>{{ trip.state.wording }}</h4>
+
+
+<div class="blockSortieDetail">
+        <div class=" formulaireInfoSortie">
+            <h1>{{ trip.name }}</h1> <h4><span>Statut : </span>{{ trip.state.wording }}</h4>
             <div class="badge badge-info"></div>
-
-            <div>{{ trip.info|nl2br }}</div>
-
-            <div>Date de la sortie : {{ trip.dateBeginning|date('d-m-Y') }}</div>
-            <div>fin des inscriptions le : {{ trip.registrationDeadline|date('d-m-Y') }}</div>
-            <div>Durée de la sortie : {{ trip.duration }}min</div>
-            <div>Participation : {{ trip.users|length }}/{{ trip.registrationMax }}</div>
-
-
-            <div>Ajoutée par : {{ trip.organizer.name }} {{ trip.organizer.firstname }}</div>
-
+            <div><span>informations : </span>{{ trip.info|nl2br }}</div>
+            <div><span>Date de la sortie : </span>{{ trip.dateBeginning|date('d-m-Y') }}</div>
+            <div><span>fin des inscriptions le : </span>{{ trip.registrationDeadline|date('d-m-Y') }}</div>
+            <div><span>Durée de la sortie : </span>{{ trip.duration }}min</div>
+            <div><span>Participation : </span>{{ trip.users|length }}/{{ trip.registrationMax }}</div>
+            <div><span>Ajoutée par : </span>{{ trip.organizer.name }} {{ trip.organizer.firstname }}</div>
         </div>
-    </div>
-    <table>
-        <thead>
-            <tr>
+    <div class="blockSortieUserInscrit">
+        <table>
+            <thead>
+            <tr class="trSortieUsers">
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for user in trip.users %}
-                <tr>
+                <tr class="trSortieUsers">
                     <td>{{user.name}}</td>
                     <td>{{user.firstname}}</td>
                     <td>{{user.email}}</td>
                     <td><a href="{{ path('user_profile', {'id' : user.id }) }}">Voir profil</a></td>
                 </tr>
-
             {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+</div>
+        <div class=" BoutonSorties">
+            {% if condition['modification'] == true %}
+                <a href="{{ path('trip_delete', {id: trip.id}) }}" class="btn-danger btn-sm">Supprimer cette sortie</a>
+                <a href="{{ path('trip_edit', {id: trip.id}) }}" class="btn-primary btn-sm">Modifier cette sortie</a>
+                <a href="{{ path('trip_cancel', {id: trip.id}) }}" class="btn-warning btn-sm">annuler cette sortie</a>
+            {% endif %}
+            {% if condition['creer'] == true %}
+                <a href="{{ path('trip_open', {id: trip.id}) }}" class="btn-info btn-sm">Ouvrir cette sortie</a>
+            {% endif %}
+            {% if (app.user not in trip.users) and condition['inscription'] == true %}
+                <a href="{{ path('trip_registration', {id: trip.id}) }}" class="btn-success btn-sm">Inscription</a>
+            {% endif %}
+            {% if (app.user in trip.users) and condition['desincription'] == true %}
+                <a href="{{ path('trip_unsubscribe', {id: trip.id}) }}" class="btn-secondary btn-sm">Désinscription</a>
+            {% endif %}
+        </div>
+
 {% endblock %}
 
 {% block title %}{% endblock %}

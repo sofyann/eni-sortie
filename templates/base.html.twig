@@ -9,21 +9,32 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="{{ path('trip_add') }}">Créer une sortie</a>
+            <ul class="navbar-nav mr-auto">
+                <li>
+                    <a class="nav-link" href="{{ path('trip_add') }}">Créer une sortie</a>
+                </li>
                 {% if is_granted("ROLE_ADMIN") %}
-                    <a class="nav-link" href="{{ path('administration_ajouter_utilisateur') }}">Ajouter un utilisateur</a>
+                    <li>
+                        <a class="nav-link" href="{{ path('administration_ajouter_utilisateur') }}">Ajouter un
+                            utilisateur</a>
+                    </li>
                 {% endif %}
-            </div>
-            <div class="navbar-nav">
+            </ul>
+            <ul class="navbar-nav">
                 {% if app.user %}
-                    <a class="nav-item nav-link" href="{{ path('profile') }}">Mon profil</a>
-                    <a class="nav-item nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    <li>
+                        <a class="nav-link" href="{{ path('profile') }}">Mon profil</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
                 {% else %}
-                    <a class="nav-item nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
                 {% endif %}
 
-            </div>
+            </ul>
         </div>
     </nav>
 </header>

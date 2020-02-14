@@ -272,7 +272,14 @@ width: 100%;
     opacity: 1;
     transition-duration: 0.4s;
 }
-/*page Sortie fin -----------------------------*/
+.boutonRadio div{
+    width: 25%;
+}
+.boutonRadio{
+    display: flex;
+    justify-content: space-around;
+}
+    /*page Sortie fin -----------------------------*/
 /*page profile debut -----------------------------*/
 .formulaireProfil{
     text-align: end;
@@ -305,19 +312,21 @@ width: 100%;
     text-align: center;
 }
 .VueProfil{
+    display: flex;
+    justify-content: space-around;
     text-align: center;
     color: #868686;
     background-color: #323c48;
     width: 90%;
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-top: 50px;
+    margin: auto auto auto auto;
     padding: 60px;
     border-radius: 2px;
     line-height: 2;
     font-size: 20px;
 }
-
+.blocDroit{
+    width: 65%;
+}
 .VueProfil .pasPhoto{
     height: 350px;
     width: 350px;
@@ -328,8 +337,33 @@ width: 100%;
 }
 .tableExplicationActivite thead {
     color: white;
+    border-bottom: solid white 0.5px;
 }
-
+.VueProfil p {
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
+.VueProfil h3 {
+    padding-top: 20px;
+   color: white;
+    background-color: #323c48;
+}
+.trTable{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.VueProfil img {
+    background-color: #323c48;
+    margin: 5px;
+}
+.VueProfil span{
+    color: white;
+}
+.VueProfil h1 {
+    color: white;
+    background-color: #323c48;
+    padding-bottom: 5px;
+}
 /*page profile fin -----------------------------*/
 /*page detailSortie debut -----------------------------*/
 .formulaireInfoSortie{
@@ -385,8 +419,7 @@ thead th{
     background-color: #04a2b3;
 }
 .trSortieUsers{
-    border-bottom: solid white;
-    border-bottom-width: 0.5px;
+    border-bottom: solid white 0.5px;
 }
 .BoutonSorties a {
     font-size: 20px;

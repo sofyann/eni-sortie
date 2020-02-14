@@ -8,18 +8,31 @@
             </div>
         {% endfor %}
     {% endfor %}
-   {#
-    <form name="formSearch" method="post" action="">
-        <p>
-            <input type="checkbox" name="" id="searchMyTrip"> Mes sorties
-        </p>
-    </form>#}
-    <button id="btn_rechercher">rechercher</button>
-    <div id="divResultSearch" class="row sortiesClass">
-        {# boucle sur le tableau contenant les trips #}
-        {% include 'trip/trip_list.html.twig' %}
-    </div>
-
+    {#
+     <form name="formSearch" method="post" action="">
+         <p>
+             <input type="checkbox" name="" id="searchMyTrip"> Mes sorties
+         </p>
+     </form>#}
+    <fieldset>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="radioAll" name="radioSearch" class="custom-control-input" value="all" checked>
+            <label class="custom-control-label" for="radioAll">Sorties du moment</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="radioOrganizer" name="radioSearch" class="custom-control-input" value="organizer">
+            <label class="custom-control-label" for="radioOrganizer">Vos sorties</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="radioSub" name="radioSearch" class="custom-control-input" value="sub">
+            <label class="custom-control-label" for="radioSubr">Vos Inscriptions</label>
+        </div>
+        <button id="btn_rechercher">rechercher</button>
+        <div id="divResultSearch" class="row sortiesClass">
+            {# boucle sur le tableau contenant les trips #}
+            {% include 'trip/trip_list.html.twig' %}
+        </div>
+    </fieldset>
 {% endblock %}
 {% block javascripts %}
     <script>const ajaxUrl = "{{ path('trip_search') }}";</script>

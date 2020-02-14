@@ -96,11 +96,11 @@ class TripController extends AbstractController
      */
     public function search(Request $request)
     {
-        $search = $request->request->get('search');
+        $search = $request->query->get('search');
         $tripRepo = $this->getDoctrine()->getRepository(Trip::class);
 
         $tabSearch = [
-            'crit' => 'organizer',
+            'crit' => $search,
             'userId' => $this->getUser()->getId()
         ];
         $trips = $tripRepo->findListTrips($tabSearch);

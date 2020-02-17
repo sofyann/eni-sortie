@@ -25,3 +25,14 @@ li {
     color: white;
     background-color: #2a323c;
 }
+
+.modal h5, .modal label {
+    color: white;
+}
+
+.modal input {
+    background-color: white;
+    width: 60%;
+    color: #2a323c;
+    margin-right: 15px;
+}

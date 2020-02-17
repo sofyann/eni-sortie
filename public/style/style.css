@@ -212,7 +212,7 @@ main {
     padding-bottom: 50px;
 
 }
-.formulaireADDSortie  div input {
+.formulaireADDSortie  div input, .formulaireADDSortie  div textarea {
     background-color: white;
     width:60%;
     color:#2a323c ;

@@ -42,7 +42,7 @@ class TripType extends AbstractType
                 'label' => 'Description',
             ])
             ->add('location',LocationType::class, [
-                'label' => 'Adresse',
+                'label' => false,
                 'mapped' => false,
                 'label_attr'=> ['class'=> 'ville']
             ])

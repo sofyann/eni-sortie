@@ -1,0 +1,1 @@
+* * * * * php bin/console CronUpdateStates > /dev/null 2>&1

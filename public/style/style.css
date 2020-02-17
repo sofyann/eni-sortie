@@ -272,12 +272,34 @@ width: 100%;
     opacity: 1;
     transition-duration: 0.4s;
 }
-.boutonRadio div{
-    width: 25%;
+.critSearch{
+    margin-left: 35px;
+    margin-top: 20px;
+    margin-bottom: 15px;
 }
-.boutonRadio{
-    display: flex;
-    justify-content: space-around;
+.radioSearch {
+    margin-right: 50px;
+    color: white;
+    display: inline-flex;
+}
+.radioSearch label {
+    margin-left: 5px;
+    margin-top: -7px;
+}
+.btnSearch{
+
+    color: white;
+    height: 30px;
+    background-color: #04a2b3;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+.btnSearch:hover{
+    color: white;
+    text-decoration:none;
+    background-color: #04a2b3;
+    opacity: 1;
+    transition-duration: 0.4s;
 }
     /*page Sortie fin -----------------------------*/
 /*page profile debut -----------------------------*/

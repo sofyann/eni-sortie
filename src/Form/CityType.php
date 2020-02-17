@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\City;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,10 +14,14 @@ class CityType extends AbstractType
     {
         $builder
             ->add('name', null, [
+                'mapped' => false,
                 'label' => 'Ville',
+                'attr' => [
+                    'class' => 'city-input'
+                ]
             ])
-            ->add('postalCode', null, [
-                'label' => 'Code Postal',
+            ->add('id', HiddenType::class, [
+                'mapped' => false
             ])
         ;
     }

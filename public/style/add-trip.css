@@ -1,0 +1,27 @@
+.cities-wrapper, .locations-wrapper {
+    position: relative;
+}
+
+.cities, .locations {
+    position: absolute;
+    top: 30px;
+    right: 18px;
+    width: 59%;
+    max-height: 200px;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: white;
+    color: #2a323c;
+    list-style: none;
+    z-index: 999;
+}
+
+li {
+    background-color: white;
+    cursor: pointer;
+}
+
+.cities li:hover, .locations li:hover {
+    color: white;
+    background-color: #2a323c;
+}

@@ -39,16 +39,19 @@ class CronUpdateStatesCommand extends Command
         $em = $this->container->get('doctrine')->getManager();
         /*** @var $trip Trip */
         foreach ($trips as $trip) {
-            if ($trip->getRegistrationDeadline()->getTimestamp() >= $currentDate && $trip->getState()->getWording() === 'Ouverte') {
+            if ($trip->getRegistrationDeadline()->getTimestamp() >= $currentDate) {
                 $trip->setState($this->getState($states,'Clôturée'));
                 $em->persist($trip);
-            } else if ($trip->getDateBeginning()->getTimestamp() <= $currentDate && ($trip->getDateBeginning()->getTimestamp() + ($trip->getDuration() * 60)) >= $currentDate && $trip->getState()->getWording() === 'Clôturée') {
+            }
+            if ($trip->getDateBeginning()->getTimestamp() <= $currentDate && ($trip->getDateBeginning()->getTimestamp() + ($trip->getDuration() * 60)) >= $currentDate) {
                 $trip->setState($this->getState($states,'En cours'));
                 $em->persist($trip);
-            } else if (($trip->getDateBeginning()->getTimestamp() + ($trip->getDuration() * 60)) < $currentDate  && $trip->getState()->getWording() === 'En cours') {
+            }
+            if (($trip->getDateBeginning()->getTimestamp() + ($trip->getDuration() * 60)) < $currentDate) {
                 $trip->setState($this->getState($states,'Passée'));
                 $em->persist($trip);
-            } else if (($trip->getDateBeginning()->getTimestamp() + ($trip->getDuration() * 60) + 2592000) < $currentDate && ($trip->getState()->getWording() === 'Passée' || $trip->getState()->getWording() === 'Annulée')) {
+            }
+            if (($trip->getDateBeginning()->getTimestamp() + ($trip->getDuration() * 60) + 2592000) < $currentDate && ($trip->getState()->getWording() === 'Passée' || $trip->getState()->getWording() === 'Annulée')) {
                 $em->remove($trip);
             }
         }

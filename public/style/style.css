@@ -4,7 +4,6 @@
 }
 /* nav début ------------------------------- */
 #navbar{
-
     background-color:#04a2b3 ;
     width: 100%;
     font-size: 35px;
@@ -14,6 +13,10 @@
     top: 0;
     z-index: 1001;
 }
+.navbar a{
+    background-color: #04a2b3;
+}
+
 .navbar-expand-lg .navbar-collapse {
     background-color:#04a2b3 ;
 }
@@ -47,7 +50,7 @@ main {
     background-color: #323c48;
     width: 50%;
     min-width: 350px;
-    margin: 25%;
+    margin: 130px auto auto 25%;
     padding: 60px;
     position: absolute;
     z-index: 1000;
@@ -279,7 +282,7 @@ width: 100%;
     display: flex;
     justify-content: space-around;
 }
-    /*page Sortie fin -----------------------------*/
+/*page Sortie fin -----------------------------*/
 /*page profile debut -----------------------------*/
 .formulaireProfil{
     text-align: end;
@@ -296,16 +299,24 @@ width: 100%;
     z-index: 1000;
     border-radius: 2px;
 }
+
+.pasPhoto {
+    text-align: center;
+    width: 100%;
+}
+
 .formulaireProfil h1{
     margin-bottom: 0;
     padding-bottom: 30px;
     text-align: center;
 }
+
 .bandeBlanche{
     width: 100%;
     height: 3px;
     background-color: #323c48;
 }
+
 .formulaireProfil h2{
     padding-bottom: 30px;
     margin-bottom: 0;
@@ -327,7 +338,7 @@ width: 100%;
 .blocDroit{
     width: 65%;
 }
-.VueProfil .pasPhoto{
+.VueProfil .pasPhoto > img{
     height: 350px;
     width: 350px;
 }

@@ -18,26 +18,46 @@ class TripRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Trip::class);
     }
-/**
-* Requête personnalisée pour récupérer les trips
-*
-*/
-    public function findListTrips()
+
+    /**
+     * Requête personnalisée pour récupérer les trips
+     *
+     */
+    public function findListTrips($tabData)
     {
-        $qb = $this->createQueryBuilder('t');
-        $qb->addSelect('t')
-            ->addSelect('s')
-            ->join('t.state', 's');
-        //$qb->addOrderBy('t.registration_deadline', 'DESC');
+        $qb = null;
+
+        if ($tabData['crit'] === 'organizer') {
+            $qb = $this->createQueryBuilder('t');
+            $qb->addSelect('s')
+                ->join('t.state', 's')
+                ->andWhere("t.organizer ='" . $tabData['userId'] . "'");
+        }
+
+        if ($tabData['crit'] === 'sub') {
+            $qb = $this->createQueryBuilder('t');
+            $qb->addSelect('s')
+                ->join('t.state', 's')
+                ->join('t.users', 'u')
+                ->andWhere("u.id ='" . $tabData['userId'] . "'");
+        }
+
+        if ($tabData['crit'] === 'all' || $qb === null) {
+            $qb = $this->createQueryBuilder('t');
+            $qb->addSelect('s')
+                ->join('t.state', 's')
+                ->andWhere("s.wording NOT IN ('Créée', 'Passé', 'En cours')");
+        }
+
         $query = $qb->getQuery();
 
         $query->setMaxResults(30);
         $query->setFirstResult(0);
 
         $results = $query->getResult();
+
         return $results;
     }
-
 
 
 }

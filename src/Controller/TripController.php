@@ -14,8 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
-
 /**
  * Class TripController
  * @package App\Controller
@@ -79,9 +77,32 @@ class TripController extends AbstractController
     {
         $tripRepo = $this->getDoctrine()->getRepository(Trip::class);
 
-        $trips = $tripRepo->findListTrips();
+        $tabSearch = [
+            'crit' => 'all',
+            'userId' => $this->getUser()->getId()
+        ];
+        $trips = $tripRepo->findListTrips($tabSearch);
 
         return $this->render('trip/list.html.twig', [
+            "trips" => $trips
+        ]);
+    }
+    /**
+     * en mode ajax
+     * @Route("/tripSearch", name="trip_search")
+     */
+    public function search(Request $request)
+    {
+        $search = $request->query->get('search');
+        $tripRepo = $this->getDoctrine()->getRepository(Trip::class);
+
+        $tabSearch = [
+            'crit' => $search,
+            'userId' => $this->getUser()->getId()
+        ];
+        $trips = $tripRepo->findListTrips($tabSearch);
+
+        return $this->render('trip/trip_list.html.twig', [
             "trips" => $trips
         ]);
     }
@@ -193,7 +214,6 @@ class TripController extends AbstractController
      */
     public function open(Trip $trip)
     {
-        //TODO verifier que la personne a les droit pour annuler
         if ($trip->getState()->getWording() != 'Créée') {
             $this->addFlash('warning', 'La sortie ne peut pas être ouverte');
             return $this->redirectToRoute('trip_detail', ["id" => $trip->getId()]);
@@ -218,7 +238,6 @@ class TripController extends AbstractController
      */
     public function cancel(Trip $trip)
     {
-        //TODO verifier que la personne a les droit pour annuler
         $stateRepo = $this->getDoctrine()->getRepository(State::class);
         $state = $stateRepo->findOneBy(array('wording' => 'Annulée'));
 

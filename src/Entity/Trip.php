@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TripRepository")
  */
-class Trip
+class Trip implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -215,5 +215,14 @@ class Trip
         $this->location = $location;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        // TODO: Implement jsonSerialize() method.
+
     }
 }

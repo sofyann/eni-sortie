@@ -22,8 +22,10 @@
                 </li>
                 {% if is_granted("ROLE_ADMIN") %}
                     <li>
-                        <a class="nav-link" href="{{ path('administration_ajouter_utilisateur') }}">Ajouter un
-                            utilisateur</a>
+                        <a class="nav-link" href="{{ path('administration') }}">Administration</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('administration_ajouter_utilisateur') }}">Ajouter un utilisateur</a>
                     </li>
                 {% endif %}
             </ul>

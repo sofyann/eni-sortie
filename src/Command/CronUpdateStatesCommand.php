@@ -39,7 +39,7 @@ class CronUpdateStatesCommand extends Command
         $em = $this->container->get('doctrine')->getManager();
         /*** @var $trip Trip */
         foreach ($trips as $trip) {
-            if ($trip->getRegistrationDeadline()->getTimestamp() >= $currentDate) {
+            if ($trip->getRegistrationDeadline()->getTimestamp() <= $currentDate) {
                 $trip->setState($this->getState($states,'Clôturée'));
                 $em->persist($trip);
             }

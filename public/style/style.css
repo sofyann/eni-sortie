@@ -454,3 +454,22 @@ thead th{
     justify-content: space-around;
 }
 /*page detailSortie fin -----------------------------*/
+/*page administration debut -----------------------------*/
+.adminpage{
+    text-align: end;
+    color: white;
+    background-color: #323c48;
+    width: 95%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 50px;
+    padding: 60px;
+    border-radius: 2px;
+    line-height: 2;
+    font-size: 20px;
+}
+.tableauAdmmiPage{
+    border-bottom: white 0.5px solid;
+}
+
+/*page administration fin -----------------------------*/

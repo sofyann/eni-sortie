@@ -8,7 +8,7 @@
             {{ message }}
         </div>
     {% endfor %}
-    <table>
+    <table class="adminpage">
         <thead>
             <tr>
             <th>Nom</th>
@@ -21,7 +21,7 @@
         </thead>
         <tbody>
             {% for user in users %}
-                <tr>
+                <tr class="tableauAdmmiPage">
                     <th>{{ user.name }}</th>
                     <th>{{ user.firstname }}</th>
                     <th>{{ user.email }}</th>
@@ -35,6 +35,7 @@
                                 Débloquer
                             {% endif %}
                         </a>
+                        |
                         <a href="{{ path('administration_remove_user', {'id': user.id }) }}">Supprimer</a>
                     </th>
                 </tr>

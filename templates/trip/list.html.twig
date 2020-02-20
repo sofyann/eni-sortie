@@ -14,26 +14,26 @@
              <input type="checkbox" name="" id="searchMyTrip"> Mes sorties
          </p>
      </form>#}
-    <fieldset class="boutonRadio">
-        <div class="custom-control custom-radio form-check-inline">
-            <input type="radio" id="radioAll" name="radioSearch" class="custom-control-input" value="all" checked>
-            <label class="custom-control-label" for="radioAll">Sorties du moment</label>
+    <div class="critSearch">
+        <div class="radioSearch">
+            <input type="radio" id="radioAll" name="radioSearch" class="" value="all" checked>
+            <label for="radioAll"> Sorties du moment</label>
         </div>
-        <div class="custom-control custom-radio form-check-inline">
-            <input type="radio" id="radioOrganizer" name="radioSearch" class="custom-control-input" value="organizer">
-            <label class="custom-control-label" for="radioOrganizer">Vos sorties</label>
+        <div class="radioSearch">
+            <input type="radio" id="radioOrganizer" name="radioSearch" class="" value="organizer">
+            <label for="radioOrganizer"> Vos sorties</label>
         </div>
-        <div class="custom-control custom-radio form-check-inline">
-            <input type="radio" id="radioSub" name="radioSearch" class="custom-control-input" value="sub">
-            <label class="custom-control-label" for="radioSub">Vos Inscriptions</label>
+        <div class="radioSearch">
+            <input type="radio" id="radioSub" name="radioSearch" class="" value="sub">
+            <label for="radioSub"> Vos Inscriptions</label>
         </div>
-        <button id="btn_rechercher">rechercher</button>
-
-    </fieldset>
-    <div id="divResultSearch" class="row sortiesClass">
-        {# boucle sur le tableau contenant les trips #}
-        {% include 'trip/trip_list.html.twig' %}
+        <button id="btn_rechercher" class="btnSearch">rechercher</button>
     </div>
+
+        <div id="divResultSearch" class="row sortiesClass">
+            {# boucle sur le tableau contenant les trips #}
+            {% include 'trip/trip_list.html.twig' %}
+        </div>
 {% endblock %}
 {% block javascripts %}
     <script>const ajaxUrl = "{{ path('trip_search') }}";</script>

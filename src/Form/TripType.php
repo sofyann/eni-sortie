@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Trip;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -29,7 +30,7 @@ class TripType extends AbstractType
                 'attr' =>[ 'min' => 0, 'class' => 'DureSortie ']
             ])
             ->add('registrationDeadline', DateTimeType::class, [
-                'label' => 'Delais d\'inscription',
+                'label' => 'Date limite d\'inscription',
                 'widget' => 'single_text'
             ])
             ->add('registrationMax', null, [
@@ -37,11 +38,12 @@ class TripType extends AbstractType
                 'attr' => [ 'min' => 0, 'class' => 'RegistrationMaxDate dateInscription  '],
 
             ])
-            ->add('info', null, [
+            ->add('info', TextareaType::class, [
                 'label' => 'Description',
             ])
             ->add('location',LocationType::class, [
-                'label' => 'Adresse',
+                'label' => false,
+                'mapped' => false,
                 'label_attr'=> ['class'=> 'ville']
             ])
         ;

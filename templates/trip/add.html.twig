@@ -1,24 +1,65 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('./style/add-trip.css') }}">
+{% endblock %}
 {% block body %}
     <div class="formulaireADDSortie">
-    <h1>Ajouter une nouvelle sortie !</h1>
-    {% for message in app.flashes('danger') %}
-        <div class="alert alert-danger">
-            {{ message }}
+        <h1>Ajouter une nouvelle sortie !</h1>
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <p>Ville organisatrice : {{ app.user.site.name }}</p>
+        {{ form_start(tripForm, {attr: {novalidate: 'novalidate'}}) }}
+        {{ form_row(tripForm.name) }}
+        {{ form_row(tripForm.dateBeginning) }}
+        {{ form_row(tripForm.duration) }}
+        {{ form_row(tripForm.dateBeginning) }}
+        {{ form_row(tripForm.registrationDeadline) }}
+        {{ form_row(tripForm.registrationMax) }}
+        {{ form_row(tripForm.info) }}
+        <div class="cities-wrapper">
+            {{ form_row(tripForm.location.city) }}
+            <ul class="cities"></ul>
         </div>
-    {% endfor %}
-    {{ form_start(tripForm, {attr: {novalidate: 'novalidate'}}) }}
-    {{ form_widget(tripForm) }}
-
-    <div class="row">
-        <div class="col-sm-10 offset-2">
-            <button class="btn btn-success">Ajouter !</button>
+        <div class="locations-wrapper">
+            {{ form_row(tripForm.location.name) }}
+            <button style="position: absolute; top: 10%; right: 3%; width: 5%; margin: 0" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <span class="btn-add-location" style="background-color: blue; border-radius: 50%; width: 20px; height: 20px; color: white;">+</span>
+            </button>
+            <ul class="locations"></ul>
         </div>
+        <div class="row">
+            <div class="col-sm-10 offset-2">
+                <button class="btn btn-success">Ajouter !</button>
+            </div>
+        </div>
+        {{ form_end(tripForm) }}
     </div>
-
-    {{ form_end(tripForm) }}
+    <div style="background-color: transparent" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un nouveau lieu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label>Nom du lieu <input type="text" id="location-name"></label>
+                    <label>adresse <input type="text" id="location-address"></label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary submit-new-location">Enregistrer</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
 {% block title %}Ajouter une sortie{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('./js/cities-autocomplete.js') }}"></script>
+{% endblock %}

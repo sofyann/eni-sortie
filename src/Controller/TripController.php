@@ -14,9 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Translation\TranslatorInterface;
-
 /**
  * Class TripController
  * @package App\Controller
@@ -130,13 +127,18 @@ class TripController extends AbstractController
      */
     public function add(Request $request)
     {
+
         $trip = new Trip();
 
         $form = $this->createForm(TripType::class, $trip);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $repo = $this->getDoctrine()->getRepository(Location::class);
+            $location = $repo->find($request->request->all()['trip']['location']['idLocation']);
+            $trip->setLocation($location);
+
             if ($trip->getDateBeginning() < $trip->getRegistrationDeadline()) {
                 $this->addFlash('danger', 'La date limite d\'inscription ne peut pas être après la date de sortie');
                 return $this->render('trip/add.html.twig', [
@@ -163,9 +165,7 @@ class TripController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Sortie ajoutée !');
-            return $this->redirectToRoute('trip_detail', array(
-                'id' => $trip->getId()
-            ));
+            return $this->redirectToRoute('trip_detail', ['id' => $trip->getId()]);
         }
 
         return $this->render('trip/add.html.twig', [

@@ -19,6 +19,8 @@
             <div><span>fin des inscriptions le : </span>{{ trip.registrationDeadline|date('d-m-Y') }}</div>
             <div><span>Durée de la sortie : </span>{{ trip.duration }}min</div>
             <div><span>Participation : </span>{{ trip.users|length }}/{{ trip.registrationMax }}</div>
+            <div><span>Lieu : </span>{{ trip.location.name }}</div>
+            <div><span>Adresse : </span>{{ trip.location.street }} - {{ trip.location.city.name }}</div>
             <div><span>Ajoutée par : </span>{{ trip.organizer.name }} {{ trip.organizer.firstname }}</div>
         </div>
     <div class="blockSortieUserInscrit">

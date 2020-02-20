@@ -95,7 +95,7 @@ main {
     min-width: 350px;
     margin-left: 15%;
     margin-right: 20%;
-    margin-top: 150px;
+    margin-top: 10px;
     padding: 60px;
     position: absolute;
     z-index: 1000;
@@ -103,7 +103,9 @@ main {
 }
 
 .formulaireRegister > h1{
-    background-color: #323c48;
+    margin-bottom: 0px;
+    padding-bottom: 5px;
+    text-align: center;
 }
 
 .nameClass{
@@ -199,7 +201,7 @@ main {
     min-width: 350px;
     margin-left: 15%;
     margin-right: 20%;
-    margin-top: 120px;
+    margin-top: 10px;
     padding: 60px;
     position: absolute;
     z-index: 1000;
@@ -315,7 +317,7 @@ width: 100%;
     min-width: 350px;
     margin-left: 15%;
     margin-right: 20%;
-    margin-top: 60px;
+    margin-top: 10px;
     padding: 60px;
     position: absolute;
     z-index: 1000;
@@ -409,7 +411,7 @@ width: 100%;
     margin-top: 50px;
     padding: 60px;
     border-radius: 2px;
-    line-height: 3;
+    line-height: 2.3;
     font-size: 20px;
 }
 .formulaireInfoSortie span{

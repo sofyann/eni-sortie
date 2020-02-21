@@ -71,7 +71,7 @@ class TripController extends AbstractController
     }
 
     /**
-     * @Route("/sorties", name="trip_list")
+     * @Route("/", name="trip_list")
      */
     public function list()
     {
